@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  pull-requests: write
+
+
 jobs:
   merge:
     runs-on: ubuntu-latest
