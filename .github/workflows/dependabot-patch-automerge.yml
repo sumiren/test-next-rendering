@@ -11,13 +11,12 @@ jobs:
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: prepare
-        id: metadata
+        id: prepare
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
       - name: do
-        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        if: ${{ steps.prepare.outputs.update-type == 'version-update:semver-patch' }}
         run: gh pr merge --auto --merge ${{github.event.pull_request.html_url}}
         env:
-          PR_URL:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
